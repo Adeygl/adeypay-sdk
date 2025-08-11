@@ -27,6 +27,7 @@ yarn add adeypay-sdk
 ```
 
 ## usage
+``` react
 1️⃣ Plain JavaScript / TypeScript
 
 import { createPayment } from "adeypay-sdk";
@@ -59,4 +60,4 @@ export default function App() {
     </div>
   );
 }
-
+```
