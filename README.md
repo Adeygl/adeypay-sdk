@@ -25,6 +25,8 @@ npm install adeypay-sdk
 # Using yarn
 yarn add adeypay-sdk
 ```
+
+## usage
 1️⃣ Plain JavaScript / TypeScript
 
 import { createPayment } from "adeypay-sdk";
