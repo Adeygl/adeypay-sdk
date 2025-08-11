@@ -21,3 +21,43 @@ This SDK is designed for **merchants** to easily embed a payment button and proc
 ## 📦 Installation
 ```bash
 npm install adeypay-sdk
+
+# Using yarn
+yarn add adeypay-sdk
+```
+
+## usage
+``` react
+1️⃣ Plain JavaScript / TypeScript
+
+import { createPayment } from "adeypay-sdk";
+
+createPayment({
+  amount: 10,
+  currency: "USD",
+  orderId: "ORDER_123",
+  callbackUrl: "https://yourwebsite.com/callback",
+  merchantKey: "YOUR_MERCHANT_KEY"
+});
+
+
+2️⃣ React Example
+import { PayButton } from "adeypay-sdk";
+
+export default function App() {
+  return (
+    <div>
+      <h1>Checkout</h1>
+      <PayButton
+        amount={10}
+        currency="USD"
+        orderId="ORDER_123"
+        callbackUrl="https://yourwebsite.com/callback"
+        merchantKey="YOUR_MERCHANT_KEY"
+      >
+        Pay $10
+      </PayButton>
+    </div>
+  );
+}
+```
