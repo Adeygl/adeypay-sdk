@@ -1,0 +1,46 @@
+{
+  "name": "adeypay-sdk",
+  "version": "0.1.1",
+  "private": false,
+  "description": "Ad eyPay merchant SDK (React + plain JS).",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./react": {
+      "import": "./dist/react/index.mjs",
+      "require": "./dist/react/index.js",
+      "types": "./dist/react/index.d.ts"
+    }
+  },
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup",
+    "clean": "rimraf dist",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "adeypay",
+    "payments",
+    "quickshop",
+    "sdk"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=16.8"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.23",
+    "rimraf": "^6.0.1",
+    "tsup": "^6.7.0",
+    "typescript": "^5.9.2"
+  }
+}
