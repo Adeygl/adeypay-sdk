@@ -2,12 +2,15 @@
   "name": "adeypay-sdk",
   "version": "0.1.1",
   "private": false,
-  "description": "Ad eyPay merchant SDK (React + plain JS).",
+  "description": "AdeyPay merchant SDK (React + plain JS).",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "src",
+    "LICENSE",
+    "README.md"
   ],
   "exports": {
     ".": {
@@ -26,13 +29,23 @@
     "build": "tsup",
     "clean": "rimraf dist",
     "prepare": "npm run build"
+  },  "repository": {
+    "type": "git",
+    "url": "https://github.com/Adeygl/adeypay-sdk.git"
   },
   "keywords": [
+    "payment",
+    "sdk",
     "adeypay",
-    "payments",
-    "quickshop",
-    "sdk"
+    "react",
+    "javascript",
+    "typescript"
   ],
+  "author": "ADEYPAY",
+  "bugs": {
+    "url": "https://github.com/Adeygl/adeypay-sdk/issues"
+  },
+  "homepage": "https://github.com/Adeygl/adeypay-sdk#readme",
   "license": "MIT",
   "peerDependencies": {
     "react": ">=16.8"
