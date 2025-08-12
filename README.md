@@ -27,7 +27,7 @@ yarn add adeypay-sdk
 ```
 
 ## usage
-``` react
+``` javascript
 
 Plain JavaScript / TypeScript
 
@@ -50,8 +50,8 @@ export default function App() {
     </div>
   );
 }
-
-FULL EXAMPLE
+``` 
+``` javascript
 
 import { PayButton } from "adeypay-sdk";
 import { useState, useMemo } from "react";
@@ -98,3 +98,29 @@ export default function DepositPage() {
 }
 
 ```
+
+## Setup
+
+1. **Get your API key**  
+   Sign up and create a merchant account at [AdeyPay Dashboard](https://mywebsite.com/register).  
+   Once registered, go to [API Keys](https://mywebsite.com/dashboard/api-keys) to get your merchant key.
+
+2. **Read the full documentation**  
+   Visit our docs here → [AdeyPay Documentation](https://docs.mywebsite.com)
+
+
+## 📦 guide
+
+| Prop          | Type                   | Required | Description                     |
+| ------------- | ---------------------- | -------- | ------------------------------- |
+| `amount`      | `number`               | ✅        | Payment amount (must be > 0)    |
+| `apiKey`      | `string`               | ✅        | Your merchant API key           |
+| `callbackUrl` | `string`               | ✅        | URL to redirect after payment   |
+| `note`        | `string`               | ❌        | Optional payment note           |
+| `children`    | `ReactNode`            | ❌        | Custom button content           |
+| `className`   | `string`               | ❌        | Tailwind/other CSS classes      |
+| `onCreated`   | `(id: string) => void` | ❌        | Called when payment is created  |
+| `onApproved`  | `(id: string) => void` | ❌        | Called when payment is approved |
+| `onError`     | `(err: Error) => void` | ❌        | Called when an error occurs     |
+| `popupWidth`  | `number`               | ❌        | Default `900`                   |
+| `popupHeight` | `number`               | ❌        | Default `700`                   |
