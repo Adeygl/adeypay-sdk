@@ -24,12 +24,14 @@ npm install adeypay-sdk
 
 # Using yarn
 yarn add adeypay-sdk
+
+
 ```
 
 ## usage
 ``` javascript
 
-Plain JavaScript / TypeScript
+// Plain JavaScript / TypeScript
 
 import { PayButton } from "adeypay-sdk";
 
@@ -45,7 +47,6 @@ export default function App() {
         onApproved={(id) => console.log("Payment approved:", id)}
         onError={(err) => console.error("Payment error:", err)}
       >
-        Pay $5
       </PayButton>
     </div>
   );
@@ -90,7 +91,6 @@ export default function DepositPage() {
         onApproved={handleApproved}
         onError={handleError}
       >
-        Deposit ${amount.toFixed(2)}
       </PayButton>
       <p>Balance: ${balance.toFixed(2)}</p>
     </div>
@@ -103,7 +103,7 @@ export default function DepositPage() {
 
 1. **Get your API key**  
    Sign up and create a merchant account at [AdeyPay Dashboard](https://mywebsite.com/register).  
-   Once registered, go to [API Keys](https://mywebsite.com/dashboard/api-keys) to get your merchant key.
+   Once registered, go to to get your merchant key.
 
 2. **Read the full documentation**  
    Visit our docs here → [AdeyPay Documentation](https://docs.mywebsite.com)
