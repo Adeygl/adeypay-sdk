@@ -28,36 +28,73 @@ yarn add adeypay-sdk
 
 ## usage
 ``` react
-1️⃣ Plain JavaScript / TypeScript
 
-import { createPayment } from "adeypay-sdk";
+Plain JavaScript / TypeScript
 
-createPayment({
-  amount: 10,
-  currency: "USD",
-  orderId: "ORDER_123",
-  callbackUrl: "https://yourwebsite.com/callback",
-  merchantKey: "YOUR_MERCHANT_KEY"
-});
-
-
-2️⃣ React Example
 import { PayButton } from "adeypay-sdk";
 
 export default function App() {
   return (
     <div>
-      <h1>Checkout</h1>
+      <h1>Buy Coffee</h1>
       <PayButton
-        amount={10}
-        currency="USD"
-        orderId="ORDER_123"
-        callbackUrl="https://yourwebsite.com/callback"
-        merchantKey="YOUR_MERCHANT_KEY"
+        amount={5}
+        apiKey="YOUR_MERCHANT_API_KEY"
+        callbackUrl="https://yourapp.com/callback"
+        onCreated={(id) => console.log("Payment created:", id)}
+        onApproved={(id) => console.log("Payment approved:", id)}
+        onError={(err) => console.error("Payment error:", err)}
       >
-        Pay $10
+        Pay $5
       </PayButton>
     </div>
   );
 }
+
+FULL EXAMPLE
+
+import { PayButton } from "adeypay-sdk";
+import { useState, useMemo } from "react";
+
+export default function DepositPage() {
+  const [balance, setBalance] = useState(0);
+  const [amountInput, setAmountInput] = useState("10.00");
+
+  const amount = useMemo(() => parseFloat(amountInput) || 0, [amountInput]);
+
+  function handleCreated(id: string) {
+    console.log("Payment created:", id);
+  }
+
+  function handleApproved(id: string) {
+    console.log("Payment approved:", id);
+    setBalance((b) => b + amount);
+  }
+
+  function handleError(err: Error) {
+    console.error("Payment error:", err);
+  }
+
+  return (
+    <div>
+      <h1>Deposit Funds</h1>
+      <input
+        value={amountInput}
+        onChange={(e) => setAmountInput(e.target.value)}
+      />
+      <PayButton
+        amount={amount}
+        apiKey="YOUR_MERCHANT_API_KEY"
+        callbackUrl={window.location.href}
+        onCreated={handleCreated}
+        onApproved={handleApproved}
+        onError={handleError}
+      >
+        Deposit ${amount.toFixed(2)}
+      </PayButton>
+      <p>Balance: ${balance.toFixed(2)}</p>
+    </div>
+  );
+}
+
 ```
