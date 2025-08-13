@@ -1,7 +1,7 @@
 // src/api.ts
 export type PaymentStatus = "waiting_user_input" | "approved" | "failed" | string;
 
-const DEFAULT_API = "https://adeypaydev-38a06ffbae18.herokuapp.com"; // local dev
+const DEFAULT_API = "https://deveback.adey.lol"; // local dev
 let localApiBase = DEFAULT_API;
 let globalApiKey: string | undefined = undefined;
 let globalCallbackUrl: string | undefined = undefined;

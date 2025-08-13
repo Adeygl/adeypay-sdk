@@ -24,7 +24,7 @@ export function PayButton({
   note,
   children,
   className,
-  openPayUrlBase = "https://adey.pages.dev/pay",
+  openPayUrlBase = "https://pay.adey.lol",
   onCreated,
   onApproved,
   onError,

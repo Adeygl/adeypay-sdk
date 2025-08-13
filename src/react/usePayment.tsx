@@ -8,10 +8,8 @@ export function usePayment() {
   const pollingRef = useRef<number | null>(null);
 
   async function startPayment(opts: { amount: number; apiKey: string; note?: string; callbackUrl?: string }) {
-    console.log("usePayment.startPayment called", opts);
     try {
       const data = await createPayment(opts);
-      console.log("createPayment response", data);
       setPaymentId(data.paymentId);
       setStatus("waiting_user_input");
       startPolling(data.paymentId);
@@ -24,12 +22,10 @@ export function usePayment() {
   }
 
   function startPolling(id: string) {
-    console.log("startPolling for", id);
     if (pollingRef.current) window.clearInterval(pollingRef.current);
     pollingRef.current = window.setInterval(async () => {
       try {
         const j = await getPaymentStatus(id);
-        console.log("polled status", j);
         setStatus(j.status);
         if (j.status === "approved" || j.status === "failed") {
           if (pollingRef.current) {

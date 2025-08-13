@@ -102,11 +102,11 @@ export default function DepositPage() {
 ## Setup
 
 1. **Get your API key**  
-   Sign up and create a merchant account at [AdeyPay Dashboard](https://mywebsite.com/register).  
+   Sign up and create a merchant account at [AdeyPay Dashboard](https://dev.adey.lol).  
    Once registered, go to to get your merchant key.
 
 2. **Read the full documentation**  
-   Visit our docs here → [AdeyPay Documentation](https://docs.mywebsite.com)
+   Visit our docs here → [AdeyPay Documentation](https://dev.adey.lol/docs)
 
 
 ## 📦 guide
