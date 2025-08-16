@@ -1,4 +1,4 @@
-// src/react/PayButton.tsx
+// src/react/CallbackButton.tsx
 import React, { useEffect, useState } from "react";
 import { usePayment } from "./usePayment";
 
@@ -13,11 +13,9 @@ type Props = {
   onCreated?: (paymentId: string) => void;
   onApproved?: (paymentId: string) => void;
   onError?: (err: Error) => void;
-  popupWidth?: number;
-  popupHeight?: number;
 };
 
-export function PayButton({
+export function CallbackButton({
   amount,
   apiKey,
   callbackUrl,
@@ -28,44 +26,29 @@ export function PayButton({
   onCreated,
   onApproved,
   onError,
-  popupWidth = 500,
-  popupHeight = 700,
 }: Props) {
   const { startPayment, paymentId, status } = usePayment();
   const [loading, setLoading] = useState(false);
-  const popupRef = React.useRef<Window | null>(null);
   const handledRef = React.useRef<Set<string>>(new Set());
 
-  // Handle payment creation and opening payment popup
-  useEffect(() => {
-    if (!paymentId) return;
-    if (handledRef.current.has(paymentId)) return;
-    handledRef.current.add(paymentId);
+  // Handle payment creation and opening payment window
+useEffect(() => {
+  if (!paymentId) return;
+  if (handledRef.current.has(paymentId)) return;
+  handledRef.current.add(paymentId);
 
-    const payUrl = `${openPayUrlBase}/${encodeURIComponent(paymentId)}`;
-    const left = (window.screen.width - popupWidth) / 2;
-    const top = (window.screen.height - popupHeight) / 4;
+  const payUrl = `${openPayUrlBase}/${encodeURIComponent(paymentId)}`;
 
-    try {
-      popupRef.current = window.open(
-        payUrl,
-        "AdeyPayPopup",
-        `width=${popupWidth},height=${popupHeight},top=${top},left=${left}`
-      );
-      
-      if (!popupRef.current) {
-        throw new Error("Popup blocked. Please allow popups for this site.");
-      }
+  try {
+    // open in the same tab
+    window.location.href = payUrl; // or window.open(payUrl, "_self")
+  } catch (err) {
+    console.error("CallbackButton navigation error:", err);
+    onError?.(err instanceof Error ? err : new Error(String(err)));
+  }
 
-      // Focus the popup if it exists
-      popupRef.current.focus();
-    } catch (err) {
-      console.error("PayButton popup error:", err);
-      onError?.(err instanceof Error ? err : new Error(String(err)));
-    }
-
-    onCreated?.(paymentId);
-  }, [paymentId, openPayUrlBase, onCreated, onError, popupWidth, popupHeight]);
+  onCreated?.(paymentId);
+}, [paymentId, openPayUrlBase, onCreated, onError]);
 
   // Handle payment status changes
   useEffect(() => {
@@ -76,13 +59,7 @@ export function PayButton({
 
     if (status === "approved") {
       handledRef.current.add(`status-${paymentId}`);
-      alert("Payment successful!");
       onApproved?.(paymentId);
-      
-      // Close the popup if it's still open
-      if (popupRef.current && !popupRef.current.closed) {
-        popupRef.current.close();
-      }
     } else if (status === "failed") {
       handledRef.current.add(`status-${paymentId}`);
       onError?.(new Error("Payment failed"));
@@ -106,7 +83,7 @@ export function PayButton({
       const cbUrl = callbackUrl ?? `${window.location.origin}/callback`;
       await startPayment({ amount, apiKey, callbackUrl: cbUrl, note });
     } catch (err) {
-      console.error("PayButton error:", err);
+      console.error("CallbackButton error:", err);
       onError?.(err instanceof Error ? err : new Error(String(err)));
     } finally {
       setLoading(false);
@@ -172,7 +149,6 @@ export function PayButton({
       <button
         className={`${className ?? ""} adeypay-btn`.trim()}
         onClick={handleClick}
-        disabled={loading}
         aria-busy={loading}
       >
         {loading ? (

@@ -33,13 +33,13 @@ yarn add adeypay-sdk
 
 // Plain JavaScript / TypeScript
 
-import { PayButton } from "adeypay-sdk";
+import { CallbackButton } from "adeypay-sdk";
 
 export default function App() {
   return (
     <div>
       <h1>Buy Coffee</h1>
-      <PayButton
+      <CallbackButton
         amount={5}
         apiKey="YOUR_MERCHANT_API_KEY"
         callbackUrl="https://yourapp.com/callback"
@@ -47,14 +47,14 @@ export default function App() {
         onApproved={(id) => console.log("Payment approved:", id)}
         onError={(err) => console.error("Payment error:", err)}
       >
-      </PayButton>
+      </CallbackButton>
     </div>
   );
 }
 ``` 
 ``` javascript
 
-import { PayButton } from "adeypay-sdk";
+import { CallbackButton } from "adeypay-sdk";
 import { useState, useMemo } from "react";
 
 export default function DepositPage() {
@@ -83,7 +83,7 @@ export default function DepositPage() {
         value={amountInput}
         onChange={(e) => setAmountInput(e.target.value)}
       />
-      <PayButton
+      <CallbackButton
         amount={amount}
         apiKey="YOUR_MERCHANT_API_KEY"
         callbackUrl={window.location.href}
@@ -91,7 +91,7 @@ export default function DepositPage() {
         onApproved={handleApproved}
         onError={handleError}
       >
-      </PayButton>
+      </CallbackButton>
       <p>Balance: ${balance.toFixed(2)}</p>
     </div>
   );

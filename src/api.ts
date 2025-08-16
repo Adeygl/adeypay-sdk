@@ -1,5 +1,5 @@
 // src/api.ts
-export type PaymentStatus = "waiting_user_input" | "approved" | "failed" | string;
+export type PaymentStatus = "waiting_user_input" | "approved" | "failed" | "Paid" |string;
 
 const DEFAULT_API = "https://deveback.adey.lol"; // local dev
 let localApiBase = DEFAULT_API;

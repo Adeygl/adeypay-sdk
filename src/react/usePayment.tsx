@@ -16,7 +16,7 @@ export function usePayment() {
       return data.paymentId;
     } catch (err) {
       console.error("usePayment.startPayment error", err);
-      // rethrow so caller (PayButton) can show user-friendly error
+      // rethrow so caller (CallbackButton) can show user-friendly error
       throw err;
     }
   }
